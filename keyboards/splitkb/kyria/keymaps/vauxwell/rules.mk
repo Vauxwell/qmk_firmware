@@ -1,5 +1,4 @@
 OLED_ENABLE = yes
-OLED_DRIVER = SSD1306      # Enables the use of OLED displays
 RGBLIGHT_ENABLE = no      # Enable keyboard RGB underglow
 NKRO_ENABLE = yes				   # Enable N-Key Rollover
 MOUSEKEY_ENABLE = yes 	   # Enable Mouse key support

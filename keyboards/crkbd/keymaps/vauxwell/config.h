@@ -1,8 +1,5 @@
 #pragma once
 
-// Lets you roll mod-tap keys
-#define IGNORE_MOD_TAP_INTERRUPT
-
 // Define which half is the master half
 #define MASTER_LEFT
 
@@ -11,7 +8,6 @@
 #define FORCE_NKRO
 
 // // Set the tapping term that determines the time in milliseconds what is a tap and what is a hold
-// #define IGNORE_MOD_TAP_INTERRUPT
 // #define TAPPING_FORCE_HOLD
 // #undef TAPPING_TERM
 // #define TAPPING_TERM 240
