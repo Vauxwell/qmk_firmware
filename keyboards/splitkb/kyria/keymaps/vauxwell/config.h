@@ -20,8 +20,11 @@
 // #define HOLD_ON_OTHER_KEY_PRESS
 
 // Mouse control settings
-#define MK_KINETIC_SPEED    //Turn on kinetic mouse control mode
-#define MOUSEKEY_INTERVAL       12
-#define MOUSEKEY_MOVE_DELTA     6
+#define MOUSEKEY_INTERVAL       16
+#define MOUSEKEY_DELAY 0
+#define MOUSEKEY_TIME_TO_MAX 55
+#define MOUSEKEY_MAX_SPEED 7
+
+#define MOUSEKEY_WHEEL_DELAY 0
 #define MOUSEKEY_ACCELERATED_SPEED 2700
 #define MOUSEKEY_WHEEL_ACCELERATED_MOVEMENTS 64
