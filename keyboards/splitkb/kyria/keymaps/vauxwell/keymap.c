@@ -14,6 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
+#include "features/achordion.h"
 
 enum layers {
     _PC = 0,
@@ -35,25 +36,39 @@ enum layers {
 #define ALT_QUOT MT(MOD_LALT, KC_QUOTE)
 #define LSFT_ESC MT(MOD_LSFT, KC_ESC)
 
+// Home row mods for QWERTY layer.
+// Gui - Alt - Control - Shift
+
+#define QHOME_A LGUI_T(KC_A)
+#define QHOME_S LALT_T(KC_S)
+#define QHOME_D LCTL_T(KC_D)
+#define QHOME_F LSFT_T(KC_F)
+
+#define QHOME_J RSFT_T(KC_J)
+#define QHOME_K RCTL_T(KC_K)
+#define QHOME_L LALT_T(KC_L)
+#define QHOME_SC LGUI_T(KC_SCLN)
+
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Base Layer: QWERTY
     [_PC] = LAYOUT(
 //  ┌──────────┬──────────┬──────────┬──────────┬──────────┬──────────┐                                                 ┌──────────┬──────────┬──────────┬──────────┬──────────┬──────────┐
-      KC_TAB   ,   KC_Q   ,   KC_W   ,   KC_E   ,  KC_R    ,  KC_T    ,                                                     KC_Y   ,   KC_U   ,  KC_I    ,  KC_O    ,  KC_P    , KC_BSPC  ,
+      KC_TAB   , KC_Q     ,   KC_W   ,   KC_E   ,  KC_R    ,  KC_T    ,                                                     KC_Y     , KC_U     ,  KC_I    , KC_O     , KC_P     , KC_BSPC  ,
 //  ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                                                 ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-      KC_LCTL  ,   KC_A   ,   KC_S   ,   KC_D   ,  KC_F    ,  KC_G    ,                                                     KC_H   ,   KC_J   ,  KC_K    ,  KC_L    ,  KC_SCLN , KC_QUOTE ,
+      KC_LCTL  , KC_A     , QHOME_S  , QHOME_D  , QHOME_F  ,  KC_G    ,                                                   KC_H     , QHOME_J  , QHOME_K  , QHOME_L  , KC_SCLN  , KC_QUOTE ,
 //  ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┬──────────┐     ┌──────────┬──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-      KC_LSFT  ,   KC_Z   ,   KC_X   ,   KC_C   ,  KC_V    ,  KC_B    ,  FUNC    , _______  ,        _______ ,   FUNC   ,   KC_N   ,   KC_M   ,  KC_COMM ,  KC_DOT  ,  KC_SLSH , KC_RSFT  ,
+      KC_LSFT  , KC_Z   ,   KC_X   ,   KC_C   ,  KC_V    ,  KC_B    ,  FUNC    , _______  ,        _______ ,   FUNC   ,   KC_N     , KC_M     ,  KC_COMM , KC_DOT   , KC_SLSH  , KC_RSFT  ,
 //  └──────────┴──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤     ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┴──────────┴──────────┘
-                                        KC_LGUI ,  KC_LALT ,  SYM     , KC_ESC ,   KC_LCTL  ,        KC_ENT  ,  KC_SPC  ,   MOVE   ,  KC_LGUI ,  _______
+                                        KC_LGUI ,  KC_LALT ,  SYM     , KC_ESC ,   KC_LCTL  ,        KC_ENT  ,  KC_SPC  , MOVE     , KC_LGUI  ,  _______
 //                                   └──────────┴──────────┴──────────┴──────────┴──────────┘     └──────────┴──────────┴──────────┴──────────┴──────────┘
     ),
   
 // Sym Layer: Numbers and symbol
     [_SYM] = LAYOUT(
 //  ┌──────────┬──────────┬──────────┬──────────┬──────────┬──────────┐                                                 ┌──────────┬──────────┬──────────┬──────────┬──────────┬──────────┐
-      KC_GRV   ,  XXXXXXX ,  KC_UNDS ,  KC_LBRC , KC_RBRC  , XXXXXXX  ,                                                    KC_EQL  ,  KC_7    ,  KC_8    ,  KC_9    ,  XXXXXXX ,  _______ ,
+      KC_GRV   ,  XXXXXXX ,  KC_UNDS ,  KC_LBRC , KC_RBRC  , KC_INS   ,                                                    KC_EQL  ,  KC_7    ,  KC_8    ,  KC_9    ,  XXXXXXX ,  _______ ,
 //  ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                                                 ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
       _______  ,  KC_LSFT ,  KC_MINS ,  KC_LCBR , KC_RCBR  , KC_BSLS  ,                                                    KC_PLUS ,  KC_4    ,  KC_5    ,  KC_6    ,  _______ ,  _______ ,
 //  ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┬──────────┐     ┌──────────┬──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
@@ -111,11 +126,39 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 
-/* The default OLED and rotary encoder code can be found at the bottom of qmk_firmware/keyboards/splitkb/kyria/rev1/rev1.c
- * These default settings can be overriden by your own settings in your keymap.c
- * For your convenience, here's a copy of those settings so that you can uncomment them if you wish to apply your own modifications.
- * DO NOT edit the rev1.c file; instead override the weakly defined default functions by your own.
- */
+// These are all taken from https://getreuer.info/posts/keyboards/achordion/index.html
+// Pascal Getreuer's wonderful work on Achordian.
+void matrix_scan_user(void) {
+  achordion_task();
+}
+
+
+bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+  if (!process_achordion(keycode, record)) { return false; }
+  // Your macros ...
+
+  return true;
+}
+
+
+uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t* record) {
+  // If you quickly hold a tap-hold key after tapping it, the tap action is
+  // repeated. Key repeating is useful e.g. for Vim navigation keys, but can
+  // lead to missed triggers in fast typing. Here, returning 0 means we
+  // instead want to "force hold" and disable key repeating.
+  switch (keycode) {
+    // case HOME_N:
+    // Repeating is useful for Vim navigation keys.
+    case QHOME_J:
+    case QHOME_K:
+    case QHOME_L:
+      return QUICK_TAP_TERM;  // Enable key repeating.
+    default:
+      return 0;  // Otherwise, force hold and disable key repeating.
+  }
+}
+
+
 
 // /* DELETE THIS LINE TO UNCOMMENT (1/2)
 #ifdef OLED_ENABLE

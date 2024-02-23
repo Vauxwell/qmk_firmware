@@ -28,3 +28,8 @@
 #define MOUSEKEY_WHEEL_DELAY 0
 #define MOUSEKEY_ACCELERATED_SPEED 2700
 #define MOUSEKEY_WHEEL_ACCELERATED_MOVEMENTS 64
+
+// Tap-hold configuration for home row mods.
+#define TAPPING_TERM 180
+#define PERMISSIVE_HOLD
+#define QUICK_TAP_TERM_PER_KEY
